@@ -2,13 +2,13 @@ package omm.mirage;
 
 import java.util.InputMismatchException;
 
-public class Calculator {
-    int a;
-    int b;
-    String operation;
-    boolean isRoman = true;
+public class Calculation {
+    private int a;
+    private int b;
+    private String operation;
+    private boolean isRoman = true;
 
-    Calculator(String[] data)
+    Calculation(String[] data)
     {
         a = checkRoman(data[0]);
         b = checkRoman(data[2]);
@@ -52,7 +52,7 @@ public class Calculator {
         }
     }
 
-    public void printResult() throws Exception{
+    public String getResult() throws Exception{
         int result;
 
         switch (operation) {
@@ -79,12 +79,12 @@ public class Calculator {
             {
                 throw new Exception("Римские числа могут быть только натуральными.");
             }
-            Roman roman = new Roman(result);
-            System.out.println(roman.get());
+            Roman roman = new Roman();
+            return roman.getRoman(result);
         }
         else
         {
-            System.out.println(result);
+            return String.valueOf(result);
         }
     }
 }
