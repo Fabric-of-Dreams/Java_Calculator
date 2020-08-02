@@ -3,16 +3,13 @@ package omm.mirage;
 import java.util.InputMismatchException;
 
 public class Calculation {
-    private int a;
-    private int b;
-    private String operation;
-    private boolean isRoman = true;
+    private static boolean isRoman = true;
 
-    Calculation(String[] data)
+    public static String calculate(String[] data) throws Exception
     {
-        a = checkRoman(data[0]);
-        b = checkRoman(data[2]);
-        operation = data[1];
+        int a = checkRoman(data[0]);
+        int b = checkRoman(data[2]);
+        String operation = data[1];
 
         if (!isRoman) {
             a = new Byte(data[0]);
@@ -21,9 +18,11 @@ public class Calculation {
                 throw new NumberFormatException("Калькулятор принимает числа от 1 до 10");
             }
         }
+
+        return getResult(a, b, operation);
     }
 
-    private int checkRoman(String arg)
+    private static int checkRoman(String arg)
     {
         switch (arg){
             case ("I"):
@@ -52,7 +51,7 @@ public class Calculation {
         }
     }
 
-    public String getResult() throws Exception{
+    private static String getResult(int a, int b, String operation) throws Exception{
         int result;
 
         switch (operation) {
@@ -79,8 +78,7 @@ public class Calculation {
             {
                 throw new Exception("Римские числа могут быть только натуральными.");
             }
-            Roman roman = new Roman();
-            return roman.getRoman(result);
+            return Roman.arabicToRoman(result);
         }
         else
         {
